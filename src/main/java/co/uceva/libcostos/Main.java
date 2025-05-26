@@ -1,41 +1,18 @@
 package co.uceva.libcostos;
 
-import co.uceva.libcostos.lib.PronosticoVentas;
+import co.uceva.libcostos.lib.CostosProceso;
 
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+        CostosProceso cp = new CostosProceso();
+        float[] procesos = {0.2f, 0.3f, 0.5f};
+        float[] unitario = {0.0f}; // donde se guardará el costo unitario
 
-        // Pedir historial de ventas
-        System.out.print("¿Cuántos meses de ventas históricas tienes?: ");
-        int numPeriodos = sc.nextInt();
-        float[] ventas = new float[numPeriodos];
+        float total = cp.calcularCosto(procesos, procesos.length, 1000f, unitario);
 
-        System.out.println("Ingresa las ventas de cada mes:");
-        for (int i = 0; i < numPeriodos; i++) {
-            System.out.printf("Mes %d: ", i + 1);
-            ventas[i] = sc.nextFloat();
-        }
-
-        // Pedir meses a pronosticar
-        System.out.print("¿Cuántos meses desea pronosticar?: ");
-        int numMesesPronosticar = sc.nextInt();
-
-        // Arreglo para almacenar resultados
-        float[] resultado = new float[numMesesPronosticar];
-
-        // Crear instancia de la clase que usa JNI
-        PronosticoVentas pv = new PronosticoVentas();
-
-        // Llamar función nativa
-        pv.calcularPronostico(ventas, numPeriodos, numMesesPronosticar, resultado);
-
-        // Mostrar resultados
-        System.out.println("Pronóstico de ventas para los próximos meses:");
-        for (int i = 0; i < numMesesPronosticar; i++) {
-            System.out.printf("Mes %d: %.2f\n", numPeriodos + i + 1, resultado[i]);
-        }
+        System.out.printf("Costo unitario: %.2f\n", unitario[0]);
+        System.out.printf("Costo total: %.2f\n", total);
     }
 }

@@ -1,0 +1,12 @@
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  server:
+    port: ${ACT_PORT:8081}
+server:
+  port: ${PORT:8080}
+spring:
+  application:
+    name: libcostos-Service
